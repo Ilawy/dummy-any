@@ -56,19 +56,9 @@ int main()
         StackOfAny s;
         s.push(&age);
         s.push(&salary);
-
-        for (int i = 0; i < s.length(); i++)
-        {
-            Any *current = s.at(i);
-            // cout << typeid(float*).name() << endl;
-            // cout << typeid(int*).name() << endl;
-            if(strcmp(current->type_.name(), typeid((float*)1).name()) == 0){
-                cout << "My float is " << current->to_float() << endl; 
-            }
-            if(strcmp(current->type_.name(), typeid((int*)1).name()) == 0){
-                cout << "My int is " << current->to_int() << endl; 
-            }
-        }
+        
+        cout << s.at(0)->as<int>() << endl;
+        cout << s.at(1)->as<float>() << endl;
     }
     catch (const char *e)
     {

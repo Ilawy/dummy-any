@@ -17,11 +17,18 @@ struct Any
     }
 
 
-    int to_int(){
-        return **(int**)this->data_;
+   
+    template <typename A>
+    bool is_a(){
+        return typeid(A*) == this->type_;
     }
 
-    float to_float(){
-        return **(float**)this->data_;
+    template <typename A>
+    A& as(){
+        if(this->is_a<A>()){
+            // void * val = this->data_;
+            return **(A**)(this->data_);
+        }
+        throw "cannot cast";
     }
 };
