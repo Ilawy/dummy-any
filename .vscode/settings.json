@@ -3,6 +3,7 @@
         "typeinfo": "cpp",
         "any": "cpp",
         "ostream": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "new": "cpp"
     }
 }
