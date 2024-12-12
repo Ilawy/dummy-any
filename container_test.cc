@@ -1,5 +1,5 @@
 #include "container.cc"
-#include "flex.cc"
+#include "./cc_labs/lib/flex_stack.hh"
 #include "iostream"
 #include "cstring"
 
