@@ -97,11 +97,15 @@ public:
             if (obj->info.__is_pointer_p())
             {
                 printable *p = *(printable **)obj->value;
-                os << p->toString();
+                char* str = p->toString();
+                os << str;
+                delete[] str;
             }
             else
             {
-                os << (*(printable *)obj->value).toString();
+                char* str = (*(printable *)obj->value).toString();
+                os << str;
+                delete[] str;
             }
         }
         else
