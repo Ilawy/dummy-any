@@ -3,7 +3,7 @@
 #include "iostream"
 #include "cstring"
 
-class Mina : printalbe
+class Mina : printable
 {
 
     void myCustomDestructor() {}

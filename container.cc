@@ -5,7 +5,7 @@
 typedef void *(*CopyFn)(void *);
 typedef void (*DelFn)(void *);
 
-class printalbe
+class printable
 {
 public:
     virtual char *toString() = 0;
@@ -92,16 +92,16 @@ public:
         {
             os << *(char **)obj->value;
         }
-        else if (obj->info.before(typeid(printalbe)))
+        else if (obj->info.before(typeid(printable)))
         {
             if (obj->info.__is_pointer_p())
             {
-                printalbe *p = *(printalbe **)obj->value;
+                printable *p = *(printable **)obj->value;
                 os << p->toString();
             }
             else
             {
-                os << (*(printalbe *)obj->value).toString();
+                os << (*(printable *)obj->value).toString();
             }
         }
         else
