@@ -5,11 +5,11 @@
 typedef void *(*CopyFn)(void *);
 typedef void (*DelFn)(void *);
 
-class printable
-{
-public:
-    virtual char *toString() = 0;
-};
+// class printable
+// {
+// public:
+//     virtual char *toString() = 0;
+// };
 
 class container
 {
@@ -19,19 +19,29 @@ class container
     DelFn _free_ = nullptr;
 
 public:
-    template <typename T>
-    container(T &&value)
-        : value{new T{std::forward<T>(value)}}, info{typeid(T)}
-    {
-    }
+    // template <typename T>
+    // container(T &&value)
+    //     : value{new T{std::forward<T>(value)}}, info{typeid(T)}
+    // {
+    // }
 
     template <typename T>
-    container(T &&value, CopyFn copy, DelFn free)
-
-        : value{new T{std::forward<T>(value)}}, info{typeid(T)}, _copy_(copy), _free_(free)
-
+    container(T x): value{new T(std::move(x))}, info(typeid(T))
     {
     }
+    
+    container(): value{nullptr}, info(typeid(void*))
+    {}
+
+    
+
+    // template <typename T>
+    // container(T &&value, CopyFn copy, DelFn free)
+
+    //     : value{new T{std::forward<T>(value)}}, info{typeid(T)}, _copy_(copy), _free_(free)
+
+    // {
+    // }
 
     container(container const &original) : info(original.info)
     {
@@ -92,24 +102,26 @@ public:
         {
             os << *(char **)obj->value;
         }
-        else if (obj->info.before(typeid(printable)))
-        {
-            if (obj->info.__is_pointer_p())
-            {
-                printable *p = *(printable **)obj->value;
-                char* str = p->toString();
-                os << str;
-                delete[] str;
-            }
-            else
-            {
-                char* str = (*(printable *)obj->value).toString();
-                os << str;
-                delete[] str;
-            }
-        }
+        // else if (obj->info.before(typeid(printable)))
+        // {
+        //     if (obj->info.__is_pointer_p())
+        //     {
+        //         std::cout << "CALLED" << std::endl;
+        //         printable *p = *(printable **)obj->value;
+        //         char *str = p->toString();
+        //         os << str;
+        //         delete[] str;
+        //     }
+        //     else
+        //     {
+        //         char *str = (*(printable *)obj->value).toString();
+        //         os << str;
+        //         delete[] str;
+        //     }
+        // }
         else
         {
+            // std::cout << obj->info.name() << " " << obj->info.before(typeid(printable*)) << std::endl;
             os << obj->value;
         }
         return os;
